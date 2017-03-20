@@ -4,36 +4,36 @@ http://www.daemonology.net/blog/2009-06-11-cryptographic-right-answers.html
 
 https://blog.fugue.co/2015-04-21-aws-kms-secrets.html
 
-#Glossary
-1) Cipher  
-2) HMAC (Hash-based Message Authentication Code)  
-    * https://en.wikipedia.org/wiki/Hash-based_message_authentication_code  
+# Glossary
+1) Symmetric Encryption
+2) Cipher
+3) [HMAC _Hash-based Message Authentication Code_](https://en.wikipedia.org/wiki/Hash-based_message_authentication_code )
 
-#Basic Troubleshooting
+# Basic Troubleshooting
 
-#Principles
+# Principles
 
-#Background
+# Background
 
-##Prereqs
+## Prereqs
 ```
 LEGACY_NONCE = b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x01'
 DEFAULT_DIGEST = 'SHA256'
 ```
 
 
-#HMAC (Hash-based Message Authentication Code)
+# HMAC (Hash-based Message Authentication Code)
 Hash-based message authentication codes (or HMACs) are a tool for calculating message authentication codes using a cryptographic hash function coupled with a secret key. You can use an HMAC to verify both the integrity and authenticity of a message. (insert reference to https://cryptography.io/en/latest/hazmat/primitives/mac/hmac/)
 
 
-##credstash setup
+## credstash setup
 
 ```
 createDdbTable(region=region, table=args.table,
                **session_params)
 ```
 
-##credstash put
+## credstash put
 
 ```
 def putSecret(name, secret, version="", kms_key="alias/credstash",
@@ -59,17 +59,17 @@ def putSecret(name, secret, version="", kms_key="alias/credstash",
 15. Updates the dictionary from step 13 with name (of the secret's key) and version (that's padded)  
 16. Writes to DynamoDB table  
 
-###credstash put *TLDR*
+### credstash put *TLDR*
 
-###credstash put *Diagram*
+#### credstash put *Diagram*
 
-##credstash get
+## credstash get
 ```
 def getSecret(name, version="", region=None,
               table="credential-store", context=None,
               **kwargs):
 ```
 
-###credstash get *TLDR*
+### credstash get *TLDR*
 
-###credstash get *Diagram*
+#### credstash get *Diagram*
